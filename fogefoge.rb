@@ -18,6 +18,7 @@ def encontra_jogador(mapa)
 end
 
 def calcula_nova_posicao(heroi, direcao)
+  heroi = heroi.dup
   case direcao
   when "W"
     heroi[0] -= 1
