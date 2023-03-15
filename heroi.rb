@@ -27,4 +27,8 @@ class Heroi
     mapa[linha][coluna] = "H"
   end
 
+  def direita
+    calcula_nova_posicao "D"
+  end
+
 end

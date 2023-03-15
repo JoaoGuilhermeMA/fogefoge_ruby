@@ -21,7 +21,6 @@ def encontra_jogador(mapa)
   nil
 end
 
-
 def posicao_valida?(mapa, posicao)
   linhas = mapa.size
   colunas = mapa[0].size
@@ -85,6 +84,13 @@ def jogador_perdeu?(mapa)
   perdeu = !encontra_jogador(mapa)
 end
 
+def remove(mapa, posicao, quantidade)
+  for direita in 1..quantidade
+    posicao = posicao.direita
+    posicao.remove_do mapa
+  end
+end
+
 def joga(nome)
   mapa = le_mapa 3
   while true
@@ -96,15 +102,13 @@ def joga(nome)
       next
     end
     heroi.remove_do mapa
-    if mapa[nova_posicao.linha][nova_posicao.coluna] =="*"
-      for direita in 1..4
-        mapa[nova_posicao.linha][nova_posicao.coluna + direita] = " "
-      end
+    if mapa[nova_posicao.linha][nova_posicao.coluna] == "*"
+      remove mapa, nova_posicao, 4
     end
     nova_posicao.coloca_no mapa
 
     mapa = move_fantasmas mapa
-    if  jogador_perdeu? mapa
+    if jogador_perdeu? mapa
       game_over
       break
     end
